@@ -15,9 +15,14 @@ Welcome to the Data Science Interview Preparation repository! This repository co
 - [Set Operators](#what-set-operators-do-you-know)
 - [Order of Appearance in SELECT](#what-is-the-order-of-appearance-of-the-common-statements-in-the-select-query)
 - [Order of Execution in SELECT](#in-which-order-the-interpreter-executes-the-common-statements-in-the-select-query)
-- [DELETE vs TRUNCATE](#what-is-the-difference-between-the-delete-and-truncate-statements)
+- [DELETE vs TRUNCATE](#what-is-the-difference-between-delete-and-truncate-statements)
 - [DROP vs TRUNCATE](#what-is-the-difference-between-the-drop-and-truncate-statements)
 - [HAVING vs WHERE](#what-is-the-difference-between-the-having-and-where-statements)
+- [OLTP vs OLAP](#oltp-vs-olap)
+- [ACID Properties](#what-is-the-acid-property-in-a-database)
+- [UNION vs UNION ALL](#what-is-the-difference-between-union-and-union-all)
+- [Common Table Expressions (CTEs)](#what-are-ctes-common-table-expressions)
+- [Window Functions](#how-do-you-use-a-window-function-in-sql)
 
 ## Data Definition Language (DDL)
 
@@ -95,9 +100,14 @@ SELECT – FROM – JOIN – ON – WHERE – GROUP BY – HAVING – ORDER BY �
 
 FROM – JOIN – ON – WHERE – GROUP BY – HAVING – SELECT – ORDER BY – LIMIT
 
-## What is the difference between the DELETE and TRUNCATE statements?
+## What is the difference between DELETE and TRUNCATE statements?
 
-DELETE is a reversible DML (Data Manipulation Language) command used to delete one or more rows from a table based on the conditions specified in the WHERE clause. Instead, TRUNCATE is an irreversible DDL (Data Definition Language) command used to delete all rows from a table. DELETE works slower than TRUNCATE. Also, we can't use the TRUNCATE statement for a table containing a foreign key.
+| DELETE | TRUNCATE |
+| --- | --- |
+| DELETE command is used to delete a row in a table. | TRUNCATE is used to delete all the rows from a table. |
+| You can rollback data after using DELETE statement. | You cannot rollback data. |
+| It is a DML command. | It is a DDL command. |
+| It is slower than TRUNCATE statement. | It is faster. |
 
 ## What is the difference between the DROP and TRUNCATE statements?
 
@@ -106,3 +116,34 @@ DROP deletes a table from the database completely, including the table structure
 ## What is the difference between the HAVING and WHERE statements?
 
 The first one works on aggregated data after they are grouped, while the second one checks each row individually. If both statements are present in a query, they appear in the following order: WHERE – GROUP BY – HAVING. The SQL engine interprets them also in the same order.
+
+## OLTP vs OLAP
+
+OLTP, or online transactional processing, allows huge groups of people to execute massive amounts of database transactions in real time, usually via the internet. A database transaction occurs when data in a database is changed, inserted, deleted, or queried.
+
+### What are the differences between OLTP and OLAP?
+
+- **OLTP** stands for online transaction processing, whereas **OLAP** stands for online analytical processing.
+- OLTP is an online database modification system, whereas OLAP is an online database query response system.
+
+## What is the ACID property in a database?
+
+ACID stands for Atomicity, Consistency, Isolation, Durability. It is used to ensure that the data transactions are processed reliably in a database system. 
+
+- **Atomicity**: Refers to the transactions that are completely done or failed where transaction refers to a single logical operation of a data. It means if one part of any transaction fails, the entire transaction fails and the database state is left unchanged.
+- **Consistency**: Ensures that the data must meet all the validation rules. In simple words, your transaction never leaves the database without completing its state.
+- **Isolation**: The main goal of isolation is concurrency control.
+- **Durability**: Means that if a transaction has been committed, it will occur whatever may come in between such as power loss, crash or any sort of error.
+
+## What is the difference between UNION and UNION ALL?
+
+- **UNION** merges the outcomes of two or more SELECT statements, removing duplicate rows.
+- **UNION ALL** merges the results without removing duplicates. While UNION ALL is faster, it may include duplicate rows.
+
+## What are CTEs (Common Table Expressions)?
+
+Common Table Expressions (CTEs) serve as momentary result sets that you can mention within SQL statements, typically found within SELECT, INSERT, UPDATE, or DELETE operations. They're established using the `WITH` keyword and are instrumental in streamlining intricate queries by dividing them into more digestible components.
+
+## How do you use a window function in SQL?
+
+Window functions are employed to carry out computations on a group of table rows that are associated with the current row. They enable the generation of result sets containing aggregated data while retaining the distinct details of each row. Typical window functions encompass ROW_NUMBER(), RANK(), DENSE_RANK(), and SUM() OVER().
